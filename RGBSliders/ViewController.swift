@@ -24,7 +24,7 @@ final class ViewController: UIViewController {
     // MARK: View Lifecycle
     override func viewDidLoad() {
         super.viewDidLoad()
-        colorDisplayView.layer.cornerRadius = 15
+        setupView()
         setupRedSlider()
         setupGreenSlider()
         setupBlueSlider()
@@ -35,16 +35,19 @@ final class ViewController: UIViewController {
     @IBAction func changeRedSlider() {
         redColorValueLabel.text = ((redSlider.value * 100).rounded()/100)
             .formatted()
+        setupView()
     }
         
     @IBAction func changeGreenSlider() {
         greenColorValueLabel.text = ((greenSlider.value * 100).rounded()/100)
             .formatted()
+        setupView()
     }
     
     @IBAction func changeBlueSlider() {
         blueColorValueLabel.text = ((blueSlider.value * 100).rounded()/100)
             .formatted()
+        setupView()
     }
     
     // MARK: Setup Sliders
@@ -73,6 +76,16 @@ final class ViewController: UIViewController {
         blueSlider.minimumTrackTintColor = .cyan
         blueSlider.maximumTrackTintColor = .gray
         blueSlider.setValue(0, animated: true)
+    }
+    
+    private func setupView() {
+        let red = CGFloat(redSlider.value)
+        let green = CGFloat(greenSlider.value)
+        let blue = CGFloat(blueSlider.value)
+        
+        colorDisplayView.layer.cornerRadius = 15
+        colorDisplayView.backgroundColor = UIColor(red: red, green: green, blue: blue, alpha: 1.0)
+        
     }
     
 
